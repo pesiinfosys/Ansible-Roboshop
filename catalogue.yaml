@@ -12,10 +12,10 @@
   - name: Checking roboshop user exist or not
     ansible.builtin.command: id roboshop
     register: user_status
-  #   ignore_error: yes
-  # - name: Creating roboshop User if not exist
-  #   when: user_status.rc != 0
-  #   ansible.builtin.user: 
-  #     name: roboshop
+    ignore_error: yes
+  - name: Creating roboshop User if not exist
+    when: user_status.rc != 0
+    ansible.builtin.user: 
+      name: roboshop
   
 
