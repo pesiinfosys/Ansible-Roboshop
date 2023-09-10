@@ -32,7 +32,7 @@
     ignore_errors: true
 
   - name: Creating /app directory
-    when: User_Status.stat.exists == False
+    when: Dir_Status.stat.exists == False
     ansible.builtin.file:
       path: /app
       state: directory
