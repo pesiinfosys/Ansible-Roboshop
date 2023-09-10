@@ -67,7 +67,8 @@
       name: mongodb-org-shell
       state: installed
   - name: Load Schema
-    ansible.builtin.command: mongo --host 172.31.43.128 </app/schema/catalogue.js
+    ansible.builtin.command: mongo --host 172.31.43.128 < /app/schema/catalogue.js
+      #remote_src: yes
   - name: Enable and Start the catalogue service
     ansible.builtin.service:
       name: catalogue
