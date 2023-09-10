@@ -1,0 +1,9 @@
+---
+- name: Install Catalogue Component
+  hosts: catalogue
+  become: yes
+  tasks:
+  - name: Setup NodeJS repos
+    ansible.builtin.script: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash"
+  
+
