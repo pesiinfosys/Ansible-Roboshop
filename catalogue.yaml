@@ -19,7 +19,7 @@
       name: roboshop
   - name: Checking Directory exit or not
     ansible.builtin.stat:
-      path: /apps
+      path: /app
     register: Dir_Status
     ignore_errors: yes
   - name: Print The Dir Statistics
@@ -31,7 +31,7 @@
   - name: Creating /app Directory
     when: Dir_Status.stat.exists == False
     ansible.builtin.file:
-      path: /apps
+      path: /app
       state: directory
       
   
