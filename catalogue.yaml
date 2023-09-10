@@ -50,8 +50,8 @@
       cmd: npm install
   - name: Copying catalogue.service file to /etc/systemd/system/
     ansible.builtin.copy:
-    src: catalogue.service
-    dest: /etc/systemd/system/catalogue.service
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
   - name: Load the catalogue service
     ansible.builtin.systemd:
       #name: catalogue
