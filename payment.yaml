@@ -4,5 +4,5 @@
   become: yes
   tasks:
   - name: Install Python 3.6
-    ansible.builtin.yum: 
-      name: "python36 gcc python3-devel"
+    ansible.builtin.shell: "yum install python36 gcc python3-devel -y"
+      
