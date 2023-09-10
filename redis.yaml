@@ -1,0 +1,27 @@
+---
+- name: Setting Up RedisServer
+  hosts: Redis
+  become: true
+  tasks:
+  - name: Installing Redis rpm file
+    ansible.builtin.yum:
+     name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
+     state: installed
+  - name: Enable Redis 6.2 from package streams
+    ansible.builtin.yum:
+      name: redis:remi-6.2
+      enabled: true
+  - name: Install Redis
+    ansible.builtin.yum:
+      name: redis
+      state: installed
+  - name: Updating Port Number in redis.conf file
+    ansible.builtin.replace:
+      path: /etc/redis.conf
+      regexp: '127.0.0.1'
+      replace: '0.0.0.0'
+  - name: Start & Enable Redis Service
+    ansible.builtin.service:
+      name: redis
+      state: started
+      enabled: yes
