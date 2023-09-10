@@ -25,8 +25,14 @@
   - name: Print The Dir Statistics
     ansible.builtin.debug:
       msg: "Dir_Statistics : {{Dir_Status}}"
+  # - name: Creating /app Directory
+  #   when: Dir_Status.rc != 0
+  #   ansible.builtin.command: mkdir /app
   - name: Creating /app Directory
-    when: Dir_Status.rc != 0
-    ansible.builtin.command: mkdir /app
+    when: Dir_Status.stat.exists == 'False'
+    ansible.builtin.file:
+      path: /app
+      state: directory
+      
   
 
