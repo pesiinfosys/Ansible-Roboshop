@@ -43,6 +43,8 @@
 
   - name: Application Build
     ansible.builtin.command: mvn clean package
+    args:
+      chdir: /app
 
   - name: Renaming Jar file
     ansible.builtin.command: mv target/shipping-1.0.jar shipping.jar
