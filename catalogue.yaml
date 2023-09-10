@@ -7,7 +7,7 @@
     ansible.builtin.shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash"
   - name: Install NodeJS
     ansible.builtin.yum: 
-      name: Nodejs
+      name: nodejs
       state: installed
   - name: Checking roboshop user exist or not
     ansible.builtin.command: id roboshop
