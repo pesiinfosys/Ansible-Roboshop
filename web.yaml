@@ -12,3 +12,23 @@
       name: nginx
       state: started
       enabled: yes
+  - name: Removing Default Content
+    ansible.builtin.command: rm -rf /usr/share/nginx/html/*
+  - name: Download the frontend content
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/web.zip
+      dest: /tmp/web.zip
+  - name: Extract the frontend content
+    ansible.builtin.unarchive:
+      src: /tmp/web.zip
+      dest: /usr/share/nginx/html
+      remote_src: yes
+  - name: Create Nginx Reverse Proxy Configuration
+    ansible.buildin.copy:
+      src: roboshop.conf
+      dest: /etc/nginx/default.d/roboshop.conf
+  - name: Restart Nginx Service
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
+  
