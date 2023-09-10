@@ -8,9 +8,11 @@
      name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm
      state: installed
   - name: Enable Redis 6.2 from package streams
-    ansible.builtin.yum:
-      name: redis:remi-6.2
-      enabled: true
+    # ansible.builtin.yum:
+    #   name: redis:remi-6.2
+    #   enabled: true
+    ansible.builtin.command: yum module enable redis:remi-6.2 -y
+
   - name: Install Redis
     ansible.builtin.yum:
       name: redis
