@@ -12,4 +12,65 @@
     - gcc
     - python3-devel
 
+  - name: Checking User Status
+    ansible.builtin.command: id roboshop
+    register: User_Status
+    ignore_errors: yes
+
+  - name: Printing User Status
+    ansible.builtin.debug:
+      msg: "User Status: {{User_Status}}"
+
+  - name: Creating User If Not Exist
+    when: User_Status.rc != 0
+    ansible.builtin.user:
+      name: roboshop
+
+  - name: Check Directory Exist or Not
+    ansible.builtin.stat:
+      path: /app
+    register: Dir_Status
+    ignore_errors: true
+
+  - name: Creating /app directory
+    when: Dir_Status.stat.exists == False
+    ansible.builtin.file:
+      path: /app
+      state: directory
+
+  - name: Download the application code
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/payment.zip
+      dest: /tmp/payment.zip
+
+  - name: Unarchive Application Code
+    ansible.builtin.unarchive:
+      src: /tmp/payment.zip
+      dest: /app
+      remote_src: true
+
+  - name: Install Dependies
+    ansible.builtin.command: pip3.6 install -r requirements.txt
+    args:
+      chdir: /app
+
+  - name: Copying payment.service
+    ansible.builtin.copy:
+      src: payment.service
+      dest: /etc/systemd/system/payment.service
+
+  - name: Restart Daemon Service
+    ansible.builtin.systemd:
+      daemon_reload: true
+
+  - name: Start Payment Service
+    ansible.builtin.service:
+      name: payment
+      state: started
+      enabled: yes
+
+
+  
+
+
       
