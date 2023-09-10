@@ -17,5 +17,16 @@
     when: user_status.rc != 0
     ansible.builtin.user: 
       name: roboshop
+  - name: Checking Directory exit or not
+    ansible.builtin.stat:
+      path: /app
+      register: Dir_Status
+      ignore_errors: yes
+  - name: Print The Dir Statistics
+    ansible.builtin.debug:
+      msg: "Dir_Statistics : {{Dir_Status}}"
+  - name: Creating /app Directory
+    when: Dir_Status.rc != 0
+    ansible.builtin.command: mkdir /app
   
 
