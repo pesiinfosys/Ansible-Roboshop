@@ -1,6 +1,8 @@
 ---
 - name: Setup Roboshop Project
-  hosts: Mongodb
+  hosts: {{component}}
   become: yes
   roles:
-  - mongodb
+  #- mongodb
+  #- catalogue
+  - {{ROLE}}
