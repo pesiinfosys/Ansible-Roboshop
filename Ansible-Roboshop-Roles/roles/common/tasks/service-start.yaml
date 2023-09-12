@@ -1,5 +1,5 @@
 - name: Enable and Start the catalogue service
   ansible.builtin.service:
-    name: {{component}}
+    name: "{{component}}"
     state: started
     enabled: yes
