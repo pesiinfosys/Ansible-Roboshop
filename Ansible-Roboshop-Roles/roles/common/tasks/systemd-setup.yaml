@@ -6,5 +6,5 @@
 - name: Load the catalogue service
   ansible.builtin.systemd:
     daemon_reload: true
-    name: {{component}}
+    name: "{{component}}"
     state: restarted
