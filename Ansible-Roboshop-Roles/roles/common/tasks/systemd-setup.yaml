@@ -1,0 +1,10 @@
+- name: "Copying {{component}}.service file "
+  ansible.builtin.copy:
+    src: {{component}}.service
+    dest: /etc/systemd/system/{{component}}.service
+
+- name: Load the catalogue service
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: {{component}}
+    state: restarted

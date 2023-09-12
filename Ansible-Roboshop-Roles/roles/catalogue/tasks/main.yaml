@@ -7,3 +7,29 @@
   ansible.builtin.import_role:
     name: common
     tasks_from: app-setup
+
+- name: Install Dependencies
+  ansible.builtin.command: npm install
+  args:
+    chdir: /app
+
+- name: Install Apllication Code
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: systemd-setup
+
+- name: Install Apllication Code
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: mongodb-client-setup
+
+- name: Load Schema
+  ansible.builtin.command: mongo --host 172.31.43.128 < /app/schema/catalogue.js
+
+- name: Install Apllication Code
+  ansible.builtin.import_role:
+  name: common
+  tasks_from: service-start
+
+
+   
