@@ -13,4 +13,8 @@
 
   - name: Print OutPut
     ansible.builtin.command: echo "{{ps_out}}"
+    
+  - name: Condition Check
+    ansible.builtin.command: echo "{{ps_out.rc}}"
+    when: ps_out.rc != 0
 
