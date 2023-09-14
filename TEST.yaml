@@ -3,8 +3,12 @@
   hosts: web
   become: true
   tasks:
-  - name: PING
+  - name: Process Check
     ansible.builtin.shell: ps -ef | grep {{item}}
     loop:
     - apache
+    register: ps_out
+
+  - name: Print OutPut
+    ansible.builtin.command: echo "{{ps_out}}"
 
