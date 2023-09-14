@@ -16,5 +16,5 @@
     
   - name: Condition Check
     ansible.builtin.command: echo "{{ps_out.rc}}"
-    when: ps_out.rc != 0
+    when: ps_out.rc != 1
 
