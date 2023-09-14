@@ -1,0 +1,7 @@
+---
+- name: Test Play
+  hosts: web
+  become: true
+  tasks:
+  - name: PING
+    ansible.builtin.pin:
