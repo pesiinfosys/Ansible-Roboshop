@@ -4,7 +4,7 @@
   become: true
   tasks:
   - name: Process Check
-    #ignore_errors: yes
+    ignore_errors: yes
     ansible.builtin.shell: ps -ef | grep {{item}} | grep -v grep
     loop:
     - nginx
