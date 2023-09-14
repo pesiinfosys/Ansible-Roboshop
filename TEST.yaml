@@ -16,5 +16,5 @@
     
   - name: Condition Check
     ansible.builtin.command: echo SIVA
-    when: ps_out.rc != 1
+    when: {{ps_out.rc}} != 1
 
